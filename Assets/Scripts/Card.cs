@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card : CardiatorState
 {
-    [SerializeField] int value = 0;
+    [SerializeField] public int value = 0;
     public GameObject CardBack = null;
     public GameObject Glow = null;
     public bool isHovered = false;

@@ -9,6 +9,11 @@ using System;
 public class PlayerTurnCardiatorState : CardiatorState
 {
     [SerializeField] Text _playerTurnTextUI = null;
+    
+
+    [SerializeField] Text enemyHealth = null;
+    public int enemymaxhealth = 20;
+    public int enemycurrenthealth = 20;
 
     int hover = 100;
 
@@ -19,8 +24,13 @@ public class PlayerTurnCardiatorState : CardiatorState
     {
         Debug.Log("Player Turn: ...Entering");
         _playerTurnTextUI.gameObject.SetActive(true);
+
         cards = controller.GetComponent<SetupCardiatorState>().GetCards();
+
         _playerTurnTextUI.text = "Player Turn";
+        
+        enemyHealth.text = "Enemy Health: " + enemycurrenthealth + "/" + enemymaxhealth;
+
         // hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
         StateMachine.Input.PressedLeft += OnPressedLeft;
@@ -43,10 +53,20 @@ public class PlayerTurnCardiatorState : CardiatorState
             if (cards[i].GetComponent<Card>().isHovered)
             {
                 cards[i].GetComponent<Card>().OnClick();
+                enemycurrenthealth -= cards[i].GetComponent<Card>().value;
                 cards.RemoveAt(i);
 
                 //controller.GetComponent<SetupCardiatorState>().SetCards(cards);
-                StateMachine.ChangeState<EnemyTurnCardiatorState>();
+                if (enemycurrenthealth <= 0)
+                {
+                    enemycurrenthealth = 0;
+                    StateMachine.ChangeState<GameOverState>();
+                }
+                else
+                {
+                    StateMachine.ChangeState<EnemyTurnCardiatorState>();
+                }
+                
             }
         }
     }

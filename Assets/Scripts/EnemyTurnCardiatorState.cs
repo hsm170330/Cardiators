@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class EnemyTurnCardiatorState : CardiatorState
 {
     public static event Action EnemyTurnBegan;
     public static event Action EnemyTurnEnded;
+    [SerializeField] Text playerHealth = null;
+    public int maxhealth = 20;
+    public int currenthealth = 20;
 
     public GameObject controller = null;
     List<GameObject> cards = null;
@@ -18,6 +22,10 @@ public class EnemyTurnCardiatorState : CardiatorState
         Debug.Log("Enemy Tuen: ...Enter");
         EnemyTurnBegan?.Invoke();
         cards = controller.GetComponent<SetupCardiatorState>().GetCards();
+
+        playerHealth.gameObject.SetActive(true);
+        playerHealth.text = "Player Health: " + currenthealth + "/" + maxhealth;
+
         StartCoroutine(EnemyThinkingRoutine(_pauseDuration));
     }
 
@@ -35,9 +43,18 @@ public class EnemyTurnCardiatorState : CardiatorState
         System.Random random = new System.Random();
         int num = random.Next(1, cards.Count);
         cards[num].GetComponent<Card>().OnClick();
+        currenthealth -= cards[num].GetComponent<Card>().value;
 
         EnemyTurnEnded?.Invoke();
         // turn over. Go back to Player.
-        StateMachine.ChangeState<PlayerTurnCardiatorState>();
+        if (currenthealth <= 0)
+        {
+            currenthealth = 0;
+            StateMachine.ChangeState<GameOverState>();
+        }
+        else
+        {
+            StateMachine.ChangeState<PlayerTurnCardiatorState>();
+        }
     }
 }
