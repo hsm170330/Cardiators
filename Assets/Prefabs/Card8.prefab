@@ -140,7 +140,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ed202e03afc21ee4f91d6a3ee7d3cd5b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -285,6 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 10
   CardBack: {fileID: 4283128859803799201}
+  Glow: {fileID: 1738445301119220889}
+  isHovered: 0
   _pauseDuration: 1.5
 --- !u!114 &5988325034047843225
 MonoBehaviour:
@@ -305,6 +307,36 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2271200457201367199}
           m_MethodName: OnClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2271200457201367199}
+          m_MethodName: Hover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2271200457201367199}
+          m_MethodName: UnHover
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

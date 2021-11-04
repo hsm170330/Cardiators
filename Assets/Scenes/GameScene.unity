@@ -785,6 +785,16 @@ MonoBehaviour:
   Card7: {fileID: 6655640293424181682, guid: fa188f544d18424438670eb2bef92028, type: 3}
   Card8: {fileID: 8377864190269335298, guid: b43c35d1589f71246a377b496415c1f1, type: 3}
   Card9: {fileID: 2102370530422080147, guid: 4b3c9f9576f3a224d8e5ad35da1d6b48, type: 3}
+  Cards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1887281143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,6 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTurnTextUI: {fileID: 422297189}
+  controller: {fileID: 1887281139}
 --- !u!114 &1887281144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,6 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c92d41887e19c40a8e9d528f4d3ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 1887281139}
   _pauseDuration: 1.5
 --- !u!1 &1970687080
 GameObject:
