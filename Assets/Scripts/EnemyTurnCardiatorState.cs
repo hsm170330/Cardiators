@@ -13,7 +13,7 @@ public class EnemyTurnCardiatorState : CardiatorState
     public int currenthealth = 20;
 
     public GameObject controller = null;
-    List<GameObject> cards = null;
+    List<Card> cards = null;
 
     [SerializeField] float _pauseDuration = 1.5f;
 
@@ -31,7 +31,7 @@ public class EnemyTurnCardiatorState : CardiatorState
 
     public override void Exit()
     {
-        Debug.Log("Enemy Tuen: Exit...");
+        Debug.Log("Enemy Turn: Exit...");
     }
 
     IEnumerator EnemyThinkingRoutine(float pauseDuration)
@@ -41,9 +41,11 @@ public class EnemyTurnCardiatorState : CardiatorState
 
         Debug.Log("Enemy performs action");
         System.Random random = new System.Random();
-        int num = random.Next(1, cards.Count);
-        cards[num].GetComponent<Card>().OnClick();
-        currenthealth -= cards[num].GetComponent<Card>().value;
+        int num = random.Next(0, cards.Count);
+        Card tempCard = cards[num];
+        cards.RemoveAt(num);
+        tempCard.OnClick();
+        currenthealth -= tempCard.value;
 
         EnemyTurnEnded?.Invoke();
         // turn over. Go back to Player.

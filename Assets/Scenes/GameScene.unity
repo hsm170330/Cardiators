@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.6, y: -96.3}
-  m_SizeDelta: {x: 960.63416, y: 132.62286}
+  m_AnchoredPosition: {x: -1.1, y: -137.3}
+  m_SizeDelta: {x: 1400.3456, y: 193.0932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364973658
 MonoBehaviour:
@@ -254,8 +254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1099, y: 618}
+  m_AnchoredPosition: {x: -1.9, y: 2.8}
+  m_SizeDelta: {x: 1600, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391998057
 MonoBehaviour:
@@ -328,8 +328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
+  m_AnchoredPosition: {x: -1.9, y: 2.8}
+  m_SizeDelta: {x: 466.4737, y: 87.35739}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &422297189
 MonoBehaviour:
@@ -420,12 +420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -509,8 +509,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 331, y: 223.9}
-  m_SizeDelta: {x: 375.1018, y: 94.12079}
+  m_AnchoredPosition: {x: 480.6, y: 328.9}
+  m_SizeDelta: {x: 546.7972, y: 137.03577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607216699
 MonoBehaviour:
@@ -680,8 +680,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1882353, g: 0.50980395, b: 0.17254902, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -696,10 +696,10 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 26.991467
+  field of view: 29.53462
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 10
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -722,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 589.6, y: 378.6, z: -1104.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -762,8 +762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -292.2, y: 223.9}
-  m_SizeDelta: {x: 375.1018, y: 94.12079}
+  m_AnchoredPosition: {x: -427.9, y: 328.9}
+  m_SizeDelta: {x: 546.7972, y: 137.03577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1823595186
 MonoBehaviour:
@@ -935,25 +935,15 @@ MonoBehaviour:
   _startingCardNumber: 9
   _numberOfPlayers: 2
   CardArea: {fileID: 364973656}
-  Card1: {fileID: 3349357982605369152, guid: caa2098919833594eb39265c347b1fd1, type: 3}
-  Card2: {fileID: 2147181451055474149, guid: 6ca42b4bc15007a49800e78c516381bf, type: 3}
-  Card3: {fileID: 568619079361204099, guid: e50de5286977881498522e669b023adb, type: 3}
-  Card4: {fileID: 5317497227046287273, guid: 212fca187601a2442a1a62b37779b357, type: 3}
-  Card5: {fileID: 7452835585342734986, guid: 9a7ee6dd6482a864a984cebaa00b3a66, type: 3}
-  Card6: {fileID: 3468258443895768001, guid: 8ec638eb42e3a5a4081a0d9ac74ce1c5, type: 3}
-  Card7: {fileID: 6655640293424181682, guid: fa188f544d18424438670eb2bef92028, type: 3}
-  Card8: {fileID: 8377864190269335298, guid: b43c35d1589f71246a377b496415c1f1, type: 3}
-  Card9: {fileID: 2102370530422080147, guid: 4b3c9f9576f3a224d8e5ad35da1d6b48, type: 3}
-  Cards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Card1: {fileID: 5265516076203245715, guid: caa2098919833594eb39265c347b1fd1, type: 3}
+  Card2: {fileID: 4040879983084341446, guid: 6ca42b4bc15007a49800e78c516381bf, type: 3}
+  Card3: {fileID: 9214944973569891697, guid: e50de5286977881498522e669b023adb, type: 3}
+  Card4: {fileID: 6269782776147701491, guid: 212fca187601a2442a1a62b37779b357, type: 3}
+  Card5: {fileID: 3373014221153078490, guid: 9a7ee6dd6482a864a984cebaa00b3a66, type: 3}
+  Card6: {fileID: 1802386950516461353, guid: 8ec638eb42e3a5a4081a0d9ac74ce1c5, type: 3}
+  Card7: {fileID: 387512689290492864, guid: fa188f544d18424438670eb2bef92028, type: 3}
+  Card8: {fileID: 2271200457201367199, guid: b43c35d1589f71246a377b496415c1f1, type: 3}
+  Card9: {fileID: 3363627572782027264, guid: 4b3c9f9576f3a224d8e5ad35da1d6b48, type: 3}
 --- !u!114 &1887281143
 MonoBehaviour:
   m_ObjectHideFlags: 0

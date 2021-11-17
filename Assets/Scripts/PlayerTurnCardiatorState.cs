@@ -18,7 +18,7 @@ public class PlayerTurnCardiatorState : CardiatorState
     int hover = 100;
 
     public GameObject controller = null;
-    List<GameObject> cards = null;
+    List<Card> cards = null;
 
     public override void Enter()
     {
@@ -43,6 +43,8 @@ public class PlayerTurnCardiatorState : CardiatorState
         _playerTurnTextUI.gameObject.SetActive(false);
         // unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
+        StateMachine.Input.PressedLeft -= OnPressedLeft;
+        StateMachine.Input.PressedRight -= OnPressedRight;
         Debug.Log("Player Turn: Exiting...");
     }
 
@@ -50,11 +52,12 @@ public class PlayerTurnCardiatorState : CardiatorState
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            if (cards[i].GetComponent<Card>().isHovered)
+            if (cards[i].isHovered)
             {
-                cards[i].GetComponent<Card>().OnClick();
-                enemycurrenthealth -= cards[i].GetComponent<Card>().value;
+                Card tempCard = cards[i];
                 cards.RemoveAt(i);
+                tempCard.OnClick();
+                enemycurrenthealth -= tempCard.value;
 
                 //controller.GetComponent<SetupCardiatorState>().SetCards(cards);
                 if (enemycurrenthealth <= 0)
@@ -75,36 +78,37 @@ public class PlayerTurnCardiatorState : CardiatorState
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            cards[i].GetComponent<Card>().UnHover();
+            cards[i].UnHover();
         }
 
         if (hover == 100)
         {
-            hover = cards.Count;
-            cards[hover].GetComponent<Card>().Hover();
+            hover = cards.Count-1;
+            cards[hover].Hover();
         }
         else
         {
             hover--;
             if (hover < 0)
             {
-                hover = cards.Count;
+                hover = cards.Count-1;
             }
-            cards[hover].GetComponent<Card>().Hover();
+            cards[hover].Hover();
         }
     }
 
     void OnPressedRight()
     {
+        Debug.Log("Hover: " + hover);
         for (int i = 0; i < cards.Count; i++)
         {
-            cards[i].GetComponent<Card>().UnHover();
+            cards[i].UnHover();
         }
 
         if (hover == 100)
         {
             hover = 0;
-            cards[hover].GetComponent<Card>().Hover();
+            cards[hover].Hover();
         }
         else
         {
@@ -113,7 +117,8 @@ public class PlayerTurnCardiatorState : CardiatorState
             {
                 hover = 0;
             }
-            cards[hover].GetComponent<Card>().Hover();
+            cards[hover].Hover();
         }
+        Debug.Log("Hover: " + hover);
     }
 }
