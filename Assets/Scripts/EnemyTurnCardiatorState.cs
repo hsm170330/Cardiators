@@ -47,6 +47,8 @@ public class EnemyTurnCardiatorState : CardiatorState
         tempCard.OnClick();
         currenthealth -= tempCard.value;
 
+        yield return new WaitForSeconds(pauseDuration);
+
         EnemyTurnEnded?.Invoke();
         // turn over. Go back to Player.
         if (currenthealth <= 0)

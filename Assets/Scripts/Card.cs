@@ -30,6 +30,7 @@ public class Card : CardiatorState
     }
     public void UnHover()
     {
+        Debug.Log("Card value " + value + "Unhovered");
         if (Glow != null)
         {
             Glow.SetActive(false);

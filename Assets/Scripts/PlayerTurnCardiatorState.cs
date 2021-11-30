@@ -14,7 +14,7 @@ public class PlayerTurnCardiatorState : CardiatorState
     [SerializeField] Text enemyHealth = null;
     public int enemymaxhealth = 20;
     public int enemycurrenthealth = 20;
-
+    bool kbused = false;
     int hover = 100;
 
     public GameObject controller = null;
@@ -35,6 +35,7 @@ public class PlayerTurnCardiatorState : CardiatorState
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
         StateMachine.Input.PressedLeft += OnPressedLeft;
         StateMachine.Input.PressedRight += OnPressedRight;
+        StateMachine.Input.MouseMoved += OnMouseMove;
         
     }
 
@@ -45,10 +46,11 @@ public class PlayerTurnCardiatorState : CardiatorState
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
         StateMachine.Input.PressedLeft -= OnPressedLeft;
         StateMachine.Input.PressedRight -= OnPressedRight;
+        StateMachine.Input.MouseMoved -= OnMouseMove;
         Debug.Log("Player Turn: Exiting...");
     }
 
-    void OnPressedConfirm()
+    public void OnPressedConfirm()
     {
         for (int i = 0; i < cards.Count; i++)
         {
@@ -76,10 +78,8 @@ public class PlayerTurnCardiatorState : CardiatorState
 
     void OnPressedLeft()
     {
-        for (int i = 0; i < cards.Count; i++)
-        {
-            cards[i].UnHover();
-        }
+        kbused = true;
+        UnhoverAll();
 
         if (hover == 100)
         {
@@ -100,10 +100,8 @@ public class PlayerTurnCardiatorState : CardiatorState
     void OnPressedRight()
     {
         Debug.Log("Hover: " + hover);
-        for (int i = 0; i < cards.Count; i++)
-        {
-            cards[i].UnHover();
-        }
+        kbused = true;
+        UnhoverAll();
 
         if (hover == 100)
         {
@@ -120,5 +118,21 @@ public class PlayerTurnCardiatorState : CardiatorState
             cards[hover].Hover();
         }
         Debug.Log("Hover: " + hover);
+    }
+    void OnMouseMove()
+    {
+        if (kbused)
+        {
+            UnhoverAll();
+            kbused = false;
+        }
+        
+    }
+    public void UnhoverAll()
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].UnHover();
+        }
     }
 }

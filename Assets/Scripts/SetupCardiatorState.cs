@@ -24,21 +24,13 @@ public class SetupCardiatorState : CardiatorState
 
         // instantiate the cards onto the play area
         cards.Add(Instantiate(Card1, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card2, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card3, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card4, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card5, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card6, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card7, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card8, new Vector3(0, 0, 0), Quaternion.identity));
-
         cards.Add(Instantiate(Card9, new Vector3(0, 0, 0), Quaternion.identity));
 
         //Randomize the cards
@@ -48,7 +40,6 @@ public class SetupCardiatorState : CardiatorState
         //Transform the cards into place
         for(int i = 0; i < cards.Count; i++)
         {
-            //Cards[i].transform.SetParent(CardArea.transform, true);
             cards[i].transform.SetParent(CardArea.transform, true);
         }
 
