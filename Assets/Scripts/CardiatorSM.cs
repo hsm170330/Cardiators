@@ -8,6 +8,6 @@ public class CardiatorSM : StateMachine
     public InputController Input => _input;
     void Start()
     {
-        ChangeState<SetupCardiatorState>();
+        ChangeState<Setup123>();
     }
 }

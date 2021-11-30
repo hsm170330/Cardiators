@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
 
-public class EnemyTurnCardiatorState : CardiatorState
+public class EnemyTurn123State : CardiatorState
 {
     public static event Action EnemyTurnBegan;
     public static event Action EnemyTurnEnded;
-    [SerializeField] Text playerHealth = null;
-    public int maxhealth = 20;
-    public int currenthealth = 20;
 
     public GameObject controller = null;
     List<Card> cards = null;
@@ -21,10 +17,7 @@ public class EnemyTurnCardiatorState : CardiatorState
     {
         Debug.Log("Enemy Turn: ...Enter");
         EnemyTurnBegan?.Invoke();
-        cards = controller.GetComponent<SetupCardiatorState>().GetCards();
-
-        playerHealth.gameObject.SetActive(true);
-        playerHealth.text = "Player Health: " + currenthealth + "/" + maxhealth;
+        cards = controller.GetComponent<Setup123>().GetCards();
 
         StartCoroutine(EnemyThinkingRoutine(_pauseDuration));
     }
@@ -42,23 +35,24 @@ public class EnemyTurnCardiatorState : CardiatorState
         Debug.Log("Enemy performs action");
         System.Random random = new System.Random();
         int num = random.Next(0, cards.Count);
+        Debug.Log(num);
         Card tempCard = cards[num];
+        Values123.AIValue = tempCard.value;
         cards.RemoveAt(num);
-        tempCard.OnClick();
-        currenthealth -= tempCard.value;
+        tempCard.Display();
 
         yield return new WaitForSeconds(pauseDuration);
 
+        //remove the cards
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].gameObject.SetActive(false);
+        }
+        PlayerTurn123State.tempCard.gameObject.SetActive(false);
+        tempCard.gameObject.SetActive(false);
+
         EnemyTurnEnded?.Invoke();
-        // turn over. Go back to Player.
-        if (currenthealth <= 0)
-        {
-            currenthealth = 0;
-            StateMachine.ChangeState<GameOverState>();
-        }
-        else
-        {
-            StateMachine.ChangeState<PlayerTurnCardiatorState>();
-        }
+        // turn over. Go to cardiator setup
+        StateMachine.ChangeState<SetupCardiatorState>();
     }
 }

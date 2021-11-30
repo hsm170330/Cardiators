@@ -34,8 +34,8 @@ public class SetupCardiatorState : CardiatorState
         cards.Add(Instantiate(Card9, new Vector3(0, 0, 0), Quaternion.identity));
 
         //Randomize the cards
-        //System.Random random = new System.Random();
-        //cards = cards.OrderBy(x => random.Next()).ToList();
+        System.Random random = new System.Random();
+        cards = cards.OrderBy(x => random.Next()).ToList();
 
         //Transform the cards into place
         for(int i = 0; i < cards.Count; i++)
@@ -54,7 +54,15 @@ public class SetupCardiatorState : CardiatorState
         if (_activated == false)
         {
             _activated = true;
-            StateMachine.ChangeState<PlayerTurnCardiatorState>();
+            if (Values123.PlayerValue > Values123.AIValue)
+            {
+                StateMachine.ChangeState<PlayerTurnCardiatorState>();
+            }
+            else
+            {
+                StateMachine.ChangeState<EnemyTurnCardiatorState>();
+            }
+            
         }
     }
 

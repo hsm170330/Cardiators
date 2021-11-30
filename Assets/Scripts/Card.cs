@@ -19,6 +19,14 @@ public class Card : CardiatorState
         StartCoroutine(DeleteCard(_pauseDuration));
     }
 
+    public void Display()
+    {
+        if (CardBack != null)
+        {
+            CardBack.SetActive(true);
+        }
+    }
+
     public void Hover()
     {
         Debug.Log("Card value " + value + "hovered");

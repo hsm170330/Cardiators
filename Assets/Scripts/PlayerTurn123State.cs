@@ -1,52 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
-using System.Security.Cryptography;
-using System;
 
-public class PlayerTurnCardiatorState : CardiatorState
+public class PlayerTurn123State : CardiatorState
 {
-    [SerializeField] static Text _playerTurnTextUI = null;
-    [SerializeField] static Text enemyHealth = null;
-
-    public static int enemymaxhealth = 20;
-    public static int enemycurrenthealth = 20;
     bool kbused = false;
     int hover = 100;
 
     public GameObject controller = null;
+    public GameObject Values = null;
+    public static Card tempCard = null;
     List<Card> cards = null;
 
     public override void Enter()
     {
-        Debug.Log("Player Turn: ...Entering");
-        _playerTurnTextUI.gameObject.SetActive(true);
+        Debug.Log("Player Turn 123");
+        cards = controller.GetComponent<Setup123>().GetCards();
 
-        cards = controller.GetComponent<SetupCardiatorState>().GetCards();
-
-        _playerTurnTextUI.text = "Player Turn";
-        
-        enemyHealth.text = "Enemy Health: " + enemycurrenthealth + "/" + enemymaxhealth;
-
-        // hook into events
+        //hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
         StateMachine.Input.PressedLeft += OnPressedLeft;
         StateMachine.Input.PressedRight += OnPressedRight;
         StateMachine.Input.MouseMoved += OnMouseMove;
-        
     }
 
     public override void Exit()
     {
-        _playerTurnTextUI.gameObject.SetActive(false);
-        // unhook from events
+        //unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
         StateMachine.Input.PressedLeft -= OnPressedLeft;
         StateMachine.Input.PressedRight -= OnPressedRight;
         StateMachine.Input.MouseMoved -= OnMouseMove;
-        Debug.Log("Player Turn: Exiting...");
     }
 
     public void OnPressedConfirm()
@@ -55,22 +39,15 @@ public class PlayerTurnCardiatorState : CardiatorState
         {
             if (cards[i].isHovered)
             {
-                Card tempCard = cards[i];
+                tempCard = cards[i];
+                Values123.PlayerValue = tempCard.value;
                 cards.RemoveAt(i);
-                tempCard.OnClick();
-                enemycurrenthealth -= tempCard.value;
+                tempCard.Display();
+                
 
                 //controller.GetComponent<SetupCardiatorState>().SetCards(cards);
-                if (enemycurrenthealth <= 0)
-                {
-                    enemycurrenthealth = 0;
-                    StateMachine.ChangeState<GameOverState>();
-                }
-                else
-                {
-                    StateMachine.ChangeState<EnemyTurnCardiatorState>();
-                }
-                
+                StateMachine.ChangeState<EnemyTurn123State>();
+
             }
         }
     }
@@ -82,7 +59,7 @@ public class PlayerTurnCardiatorState : CardiatorState
 
         if (hover == 100)
         {
-            hover = cards.Count-1;
+            hover = cards.Count - 1;
             cards[hover].Hover();
         }
         else
@@ -90,12 +67,11 @@ public class PlayerTurnCardiatorState : CardiatorState
             hover--;
             if (hover < 0)
             {
-                hover = cards.Count-1;
+                hover = cards.Count - 1;
             }
             cards[hover].Hover();
         }
     }
-
     void OnPressedRight()
     {
         Debug.Log("Hover: " + hover);
@@ -125,7 +101,7 @@ public class PlayerTurnCardiatorState : CardiatorState
             UnhoverAll();
             kbused = false;
         }
-        
+
     }
     public void UnhoverAll()
     {
