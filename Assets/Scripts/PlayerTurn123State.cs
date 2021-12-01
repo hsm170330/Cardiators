@@ -15,6 +15,8 @@ public class PlayerTurn123State : CardiatorState
     public override void Enter()
     {
         Debug.Log("Player Turn 123");
+        TurnText.pText.gameObject.SetActive(true);
+
         cards = controller.GetComponent<Setup123>().GetCards();
 
         //hook into events
@@ -31,6 +33,8 @@ public class PlayerTurn123State : CardiatorState
         StateMachine.Input.PressedLeft -= OnPressedLeft;
         StateMachine.Input.PressedRight -= OnPressedRight;
         StateMachine.Input.MouseMoved -= OnMouseMove;
+
+        TurnText.pText.gameObject.SetActive(false);
     }
 
     public void OnPressedConfirm()

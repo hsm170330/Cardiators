@@ -8,9 +8,6 @@ public class EnemyTurnCardiatorState : CardiatorState
 {
     public static event Action EnemyTurnBegan;
     public static event Action EnemyTurnEnded;
-    [SerializeField] Text playerHealth = null;
-    public int maxhealth = 20;
-    public int currenthealth = 20;
 
     public GameObject controller = null;
     List<Card> cards = null;
@@ -20,11 +17,10 @@ public class EnemyTurnCardiatorState : CardiatorState
     public override void Enter()
     {
         Debug.Log("Enemy Turn: ...Enter");
+        TurnText.aText.gameObject.SetActive(true);
+
         EnemyTurnBegan?.Invoke();
         cards = controller.GetComponent<SetupCardiatorState>().GetCards();
-
-        playerHealth.gameObject.SetActive(true);
-        playerHealth.text = "Player Health: " + currenthealth + "/" + maxhealth;
 
         StartCoroutine(EnemyThinkingRoutine(_pauseDuration));
     }
@@ -32,6 +28,7 @@ public class EnemyTurnCardiatorState : CardiatorState
     public override void Exit()
     {
         Debug.Log("Enemy Turn: Exit...");
+        TurnText.aText.gameObject.SetActive(false);
     }
 
     IEnumerator EnemyThinkingRoutine(float pauseDuration)
@@ -45,15 +42,18 @@ public class EnemyTurnCardiatorState : CardiatorState
         Card tempCard = cards[num];
         cards.RemoveAt(num);
         tempCard.OnClick();
-        currenthealth -= tempCard.value;
+        Health.PlayerHealth -= tempCard.value;
 
         yield return new WaitForSeconds(pauseDuration);
 
         EnemyTurnEnded?.Invoke();
         // turn over. Go back to Player.
-        if (currenthealth <= 0)
+        if (Health.PlayerHealth <= 0)
         {
-            currenthealth = 0;
+            Health.PlayerHealth = 0;
+            TurnText.pText.gameObject.SetActive(true);
+            TurnText.pText.text = "You Lose";
+
             StateMachine.ChangeState<GameOverState>();
         }
         else

@@ -8,11 +8,6 @@ using System;
 
 public class PlayerTurnCardiatorState : CardiatorState
 {
-    [SerializeField] static Text _playerTurnTextUI = null;
-    [SerializeField] static Text enemyHealth = null;
-
-    public static int enemymaxhealth = 20;
-    public static int enemycurrenthealth = 20;
     bool kbused = false;
     int hover = 100;
 
@@ -22,13 +17,11 @@ public class PlayerTurnCardiatorState : CardiatorState
     public override void Enter()
     {
         Debug.Log("Player Turn: ...Entering");
-        _playerTurnTextUI.gameObject.SetActive(true);
+        TurnText.pText.gameObject.SetActive(true);
 
         cards = controller.GetComponent<SetupCardiatorState>().GetCards();
 
-        _playerTurnTextUI.text = "Player Turn";
-        
-        enemyHealth.text = "Enemy Health: " + enemycurrenthealth + "/" + enemymaxhealth;
+        TurnText.pText.gameObject.SetActive(true);
 
         // hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
@@ -40,7 +33,7 @@ public class PlayerTurnCardiatorState : CardiatorState
 
     public override void Exit()
     {
-        _playerTurnTextUI.gameObject.SetActive(false);
+        TurnText.pText.gameObject.SetActive(false);
         // unhook from events
         StateMachine.Input.PressedConfirm -= OnPressedConfirm;
         StateMachine.Input.PressedLeft -= OnPressedLeft;
@@ -58,12 +51,12 @@ public class PlayerTurnCardiatorState : CardiatorState
                 Card tempCard = cards[i];
                 cards.RemoveAt(i);
                 tempCard.OnClick();
-                enemycurrenthealth -= tempCard.value;
+                Health.AIHealth -= tempCard.value;
 
                 //controller.GetComponent<SetupCardiatorState>().SetCards(cards);
-                if (enemycurrenthealth <= 0)
+                if (Health.AIHealth <= 0)
                 {
-                    enemycurrenthealth = 0;
+                    Health.AIHealth = 0;
                     StateMachine.ChangeState<GameOverState>();
                 }
                 else

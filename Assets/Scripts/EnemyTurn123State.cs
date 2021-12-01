@@ -16,6 +16,8 @@ public class EnemyTurn123State : CardiatorState
     public override void Enter()
     {
         Debug.Log("Enemy Turn: ...Enter");
+        TurnText.aText.gameObject.SetActive(true);
+
         EnemyTurnBegan?.Invoke();
         cards = controller.GetComponent<Setup123>().GetCards();
 
@@ -25,6 +27,7 @@ public class EnemyTurn123State : CardiatorState
     public override void Exit()
     {
         Debug.Log("Enemy Turn: Exit...");
+        TurnText.aText.gameObject.SetActive(false);
     }
 
     IEnumerator EnemyThinkingRoutine(float pauseDuration)
