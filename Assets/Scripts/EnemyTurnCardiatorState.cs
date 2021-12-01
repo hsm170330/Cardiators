@@ -14,6 +14,17 @@ public class EnemyTurnCardiatorState : CardiatorState
 
     [SerializeField] float _pauseDuration = 1.5f;
 
+    [SerializeField] AudioClip Clip01 = null;
+    [SerializeField] AudioClip Clip02 = null;
+    [SerializeField] AudioClip Clip05 = null;
+    [SerializeField] AudioClip Clip06 = null;
+    [SerializeField] AudioClip Clip07 = null;
+    [SerializeField] AudioClip Clip08 = null;
+    [SerializeField] AudioClip Clip09 = null;
+    [SerializeField] AudioClip Clip10 = null;
+    [SerializeField] AudioClip Clip12 = null;
+    [SerializeField] AudioClip PlayerDamage = null;
+
     public override void Enter()
     {
         Debug.Log("Enemy Turn: ...Enter");
@@ -42,10 +53,12 @@ public class EnemyTurnCardiatorState : CardiatorState
         Card tempCard = cards[num];
         cards.RemoveAt(num);
         tempCard.OnClick();
-        Health.PlayerHealth -= tempCard.value;
+        PlayAudio(tempCard.value);
 
         yield return new WaitForSeconds(pauseDuration);
-
+        AudioManager.PlayClip2D(PlayerDamage, 1);
+        Health.PlayerHealth -= tempCard.value;
+        yield return new WaitForSeconds(pauseDuration);
         EnemyTurnEnded?.Invoke();
         // turn over. Go back to Player.
         if (Health.PlayerHealth <= 0)
@@ -60,5 +73,40 @@ public class EnemyTurnCardiatorState : CardiatorState
         {
             StateMachine.ChangeState<PlayerTurnCardiatorState>();
         }
+    }
+
+    public void PlayAudio(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                AudioManager.PlayClip2D(Clip01, 1);
+                break;
+            case 2:
+                AudioManager.PlayClip2D(Clip02, 1);
+                break;
+            case 5:
+                AudioManager.PlayClip2D(Clip05, 1);
+                break;
+            case 6:
+                AudioManager.PlayClip2D(Clip06, 1);
+                break;
+            case 7:
+                AudioManager.PlayClip2D(Clip07, 1);
+                break;
+            case 8:
+                AudioManager.PlayClip2D(Clip08, 1);
+                break;
+            case 9:
+                AudioManager.PlayClip2D(Clip09, 1);
+                break;
+            case 10:
+                AudioManager.PlayClip2D(Clip10, 1);
+                break;
+            case 12:
+                AudioManager.PlayClip2D(Clip12, 1);
+                break;
+        }
+
     }
 }

@@ -13,6 +13,20 @@ public class PlayerTurnCardiatorState : CardiatorState
 
     public GameObject controller = null;
     List<Card> cards = null;
+    public Card tempCard;
+
+    [SerializeField] float _pauseDuration = 1.5f;
+
+    [SerializeField] AudioClip Clip01 = null;
+    [SerializeField] AudioClip Clip02 = null;
+    [SerializeField] AudioClip Clip05 = null;
+    [SerializeField] AudioClip Clip06 = null;
+    [SerializeField] AudioClip Clip07 = null;
+    [SerializeField] AudioClip Clip08 = null;
+    [SerializeField] AudioClip Clip09 = null;
+    [SerializeField] AudioClip Clip10 = null;
+    [SerializeField] AudioClip Clip12 = null;
+    [SerializeField] AudioClip AIDamage = null;
 
     public override void Enter()
     {
@@ -48,22 +62,11 @@ public class PlayerTurnCardiatorState : CardiatorState
         {
             if (cards[i].isHovered)
             {
-                Card tempCard = cards[i];
+                tempCard = cards[i];
                 cards.RemoveAt(i);
                 tempCard.OnClick();
-                Health.AIHealth -= tempCard.value;
-
-                //controller.GetComponent<SetupCardiatorState>().SetCards(cards);
-                if (Health.AIHealth <= 0)
-                {
-                    Health.AIHealth = 0;
-                    StateMachine.ChangeState<GameOverState>();
-                }
-                else
-                {
-                    StateMachine.ChangeState<EnemyTurnCardiatorState>();
-                }
-                
+                PlayAudio(tempCard.value);
+                StartCoroutine(PlayAIDamageAudio(_pauseDuration));
             }
         }
     }
@@ -125,6 +128,61 @@ public class PlayerTurnCardiatorState : CardiatorState
         for (int i = 0; i < cards.Count; i++)
         {
             cards[i].UnHover();
+        }
+    }
+
+    IEnumerator PlayAIDamageAudio(float pauseDuration)
+    {
+        yield return new WaitForSeconds(pauseDuration);
+        AudioManager.PlayClip2D(AIDamage, 1);
+        Health.AIHealth -= tempCard.value;
+        if (Health.AIHealth <= 0)
+        {
+            Health.AIHealth = 0;
+            StateMachine.ChangeState<GameOverState>();
+        }
+        else
+        {
+            StartCoroutine(ChangeToEnemyTurn(1.5f));
+        }
+    }
+    IEnumerator ChangeToEnemyTurn(float pauseDuration)
+    {
+        yield return new WaitForSeconds(pauseDuration);
+        StateMachine.ChangeState<EnemyTurnCardiatorState>();
+    }
+
+    public void PlayAudio(int value)
+    {
+        switch (value)
+        {
+            case 1:
+                AudioManager.PlayClip2D(Clip01, 1);
+                break;
+            case 2:
+                AudioManager.PlayClip2D(Clip02, 1);
+                break;
+            case 5:
+                AudioManager.PlayClip2D(Clip05, 1);
+                break;
+            case 6:
+                AudioManager.PlayClip2D(Clip06, 1);
+                break;
+            case 7:
+                AudioManager.PlayClip2D(Clip07, 1);
+                break;
+            case 8:
+                AudioManager.PlayClip2D(Clip08, 1);
+                break;
+            case 9:
+                AudioManager.PlayClip2D(Clip09, 1);
+                break;
+            case 10:
+                AudioManager.PlayClip2D(Clip10, 1);
+                break;
+            case 12:
+                AudioManager.PlayClip2D(Clip12, 1);
+                break;
         }
     }
 }
