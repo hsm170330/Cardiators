@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameOverState : CardiatorState
 {
+    public GameObject GameEnd = null;
     public override void Enter()
     {
         StartCoroutine(GameOverText());
@@ -22,5 +23,6 @@ public class GameOverState : CardiatorState
             TurnText.pText.gameObject.SetActive(true);
             TurnText.pText.text = "You Lose";
         }
+        GameEnd.SetActive(true);
     }
 }
