@@ -48,11 +48,6 @@ public class PlayerTurnCardiatorState : CardiatorState
     public override void Exit()
     {
         TurnText.pText.gameObject.SetActive(false);
-        // unhook from events
-        StateMachine.Input.PressedConfirm -= OnPressedConfirm;
-        StateMachine.Input.PressedLeft -= OnPressedLeft;
-        StateMachine.Input.PressedRight -= OnPressedRight;
-        StateMachine.Input.MouseMoved -= OnMouseMove;
         Debug.Log("Player Turn: Exiting...");
     }
 
@@ -62,6 +57,12 @@ public class PlayerTurnCardiatorState : CardiatorState
         {
             if (cards[i].isHovered)
             {
+                // unhook from events
+                StateMachine.Input.PressedConfirm -= OnPressedConfirm;
+                StateMachine.Input.PressedLeft -= OnPressedLeft;
+                StateMachine.Input.PressedRight -= OnPressedRight;
+                StateMachine.Input.MouseMoved -= OnMouseMove;
+
                 tempCard = cards[i];
                 cards.RemoveAt(i);
                 tempCard.OnClick();
